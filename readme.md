@@ -5,8 +5,10 @@ python3 -m venv .venv
 [//]: # (pip install fastapi uvicorn)
 pip install fastapi[all]
 
+pip install sqlalchemy alembic asyncpg
+
 uvicorn app.main:app --reload
 
 
 --set PYTHONPATH=%PYTHONPATH%;D:\education\Py\projects\fa_booking\app--
-~1.5.~
+~1.5.9~
