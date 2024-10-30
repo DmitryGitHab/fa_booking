@@ -7,8 +7,15 @@ pip install fastapi[all]
 
 pip install sqlalchemy alembic asyncpg
 
+alembic init migrations
+alembic revision --autogenerate -m "Init migration"
+alembic upgrade head  
+
 uvicorn app.main:app --reload
 
 
 --set PYTHONPATH=%PYTHONPATH%;D:\education\Py\projects\fa_booking\app--
-~1.5.9~
+
+
+
+~1.5.10~
