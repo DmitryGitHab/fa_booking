@@ -9,6 +9,11 @@ from alembic import context
 
 from app.config import settings
 from app.database import Base
+from app.hotels.models import Hotels  # noqa
+from app.hotels.rooms.models import Rooms  # noqa
+from app.bookings.models import Bookings  # noqa
+from app.users.models import Users  # noqa
+
 from app.hotels.models import Hotels
 
 # sys.path.insert(0, dirname(dirname(abspath(__file__)))) - не требуется

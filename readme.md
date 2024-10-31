@@ -18,4 +18,4 @@ uvicorn app.main:app --reload
 
 
 
-~1.5.10~
+~1.6.~
