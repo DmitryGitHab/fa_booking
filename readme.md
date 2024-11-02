@@ -1,6 +1,9 @@
 python3 -m venv .venv
 .\.venv\Scripts\activate
 
+
+uvicorn app.main:app --reload --port 8080    
+
 [//]: # (422 - validation error)
 [//]: # (pip install fastapi uvicorn)
 pip install fastapi[all]
@@ -19,3 +22,15 @@ uvicorn app.main:app --reload
 
 
 ~1.6.~
+
+ВАЖНО:
+для возвращения результатов от Алхимии использовать:
+!!!result.mappings().all()!!!
+
+добавлять в запросах # __table__.columns нужен для отсутствия вложенности в ответе Алхимии
+async with async_session_maker() as session:
+    query = (
+        select(
+            Bookings.__table__.columns,
+            Rooms.__table__.columns,
+        )

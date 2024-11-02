@@ -7,7 +7,7 @@ from app.database import Base
 if TYPE_CHECKING:
     # Убирает предупреждения отсутствия импорта и неприятные подчеркивания в
     # PyCharm и VSCode
-    from bookings.models import Bookings
+    from app.bookings.models import Bookings
 
 # Модель написана в соответствии с современным стилем Алхимии (версии 2.x)
 class Users(Base):

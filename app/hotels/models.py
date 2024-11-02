@@ -8,7 +8,7 @@ from app.database import Base
 if TYPE_CHECKING:
     # Убирает предупреждения отсутствия импорта и неприятные подчеркивания в
     # PyCharm и VSCode
-    from hotels.rooms.models import Rooms
+    from app.hotels.rooms.models import Rooms
 
 
 # Модель написана в соответствии с современным стилем Алхимии (версии 2.x)

@@ -5,11 +5,18 @@ from sqlalchemy.orm import relationship, mapped_column, Mapped
 
 from app.database import Base
 
+# from app.users.models import Users
+from app.hotels.models import Hotels
+from app.hotels.rooms.models import Rooms
+
+
+
 if TYPE_CHECKING:
     # Убирает предупреждения отсутствия импорта и неприятные подчеркивания в
     # PyCharm и VSCode
     from app.hotels.rooms.models import Rooms
     from app.users.models import Users
+    from app.hotels.models import Hotels
 
 
 # Модель написана в соответствии с современным стилем Алхимии (версии 2.x)
