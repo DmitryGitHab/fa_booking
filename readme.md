@@ -34,3 +34,5 @@ async with async_session_maker() as session:
             Bookings.__table__.columns,
             Rooms.__table__.columns,
         )
+
+ValueError: [TypeError("'coroutine' object is not iterable"), TypeError('vars() argument must have __dict__ attribute')] - не прописан await! 
