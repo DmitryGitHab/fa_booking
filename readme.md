@@ -13,13 +13,16 @@ pip install sqlalchemy alembic asyncpg
 alembic init migrations
 alembic revision --autogenerate -m "Init migration"
 alembic upgrade head  
+pip install passlib python-jose
+
 
 uvicorn app.main:app --reload
 
 
 --set PYTHONPATH=%PYTHONPATH%;D:\education\Py\projects\fa_booking\app--
 
-
+401 - юзер не залогинен, 
+403 - юзер залогинен, но нет прав на данный эндпоинт
 
 ~1.6.~
 

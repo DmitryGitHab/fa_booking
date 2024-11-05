@@ -15,7 +15,7 @@ class SBooking(BaseModel):
     total_days: int
 
     # orm_mode поменял название во 2 версии Pydantic
-    model_config = ConfigDict(from_attributes=True)
+    # model_config = ConfigDict(from_attributes=True)
 
 class SBookingInfo(SBooking):
     image_id: int
