@@ -5,7 +5,8 @@ from pydantic import BaseModel
 from datetime import date
 
 from app.bookings.router import router as router_bookings
-#
+from app.users.router import router_auth as router_auth
+
 # from app.hotels.models import Hotels
 # from app.hotels.rooms.models import Rooms
 # from app.users.models import Users
@@ -13,6 +14,8 @@ from app.bookings.router import router as router_bookings
 
 app = FastAPI()
 
+
+app.include_router(router_auth)
 app.include_router(router_bookings)
 
 
