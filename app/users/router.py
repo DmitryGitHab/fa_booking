@@ -3,7 +3,7 @@ from typing import Annotated
 from fastapi import APIRouter, Depends, Response, Form, HTTPException
 
 # from app.exceptions import CannotAddDataToDatabase, UserAlreadyExistsException
-# from app.users.auth import authenticate_user, create_access_token, get_password_hash
+from app.users.auth import authenticate_user, create_access_token, get_password_hash
 from app.users.auth import get_password_hash
 from app.users.dao import UserDAO
 # from app.users.dependencies import get_current_user
@@ -33,12 +33,12 @@ async def register_user(email: Annotated[str, Form()], password: Annotated[str, 
         raise HTTPException(status_code=500)
 
 
-# @router_auth.post("/login")
-# async def login_user(response: Response, user_data: SUserAuth):
-#     user = await authenticate_user(user_data.email, user_data.password)
-#     access_token = create_access_token({"sub": str(user.id)})
-#     response.set_cookie("booking_access_token", access_token, httponly=True)
-#     return {"access_token": access_token}
+@router_auth.post("/login")
+async def login_user(response: Response, user_data: SUserAuth):
+    user = await authenticate_user(user_data.email, user_data.password)
+    access_token = create_access_token({"sub": str(user.id)})
+    response.set_cookie("booking_access_token", access_token, httponly=True)
+    return {"access_token": access_token}
 #
 #
 # @router_auth.post("/logout")
