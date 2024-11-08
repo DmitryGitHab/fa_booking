@@ -39,3 +39,5 @@ async with async_session_maker() as session:
         )
 
 ValueError: [TypeError("'coroutine' object is not iterable"), TypeError('vars() argument must have __dict__ attribute')] - не прописан await! 
+Функция существует только в рамках роутера Depends
+
