@@ -6,6 +6,7 @@ from datetime import date
 
 from app.bookings.router import router as router_bookings
 from app.users.router import router_auth as router_auth
+from app.users.router import router_auth as router_users
 
 # from app.hotels.models import Hotels
 # from app.hotels.rooms.models import Rooms
@@ -14,7 +15,7 @@ from app.users.router import router_auth as router_auth
 
 app = FastAPI()
 
-
+app.include_router(router_users)
 app.include_router(router_auth)
 app.include_router(router_bookings)
 

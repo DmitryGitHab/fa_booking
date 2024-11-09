@@ -8,6 +8,8 @@ from app.users.auth import get_password_hash
 from app.users.dao import UserDAO
 # from app.users.dependencies import get_current_user
 # from app.users.models import Users
+from app.users.dependencies import get_current_user
+from app.users.models import Users
 from app.users.schemas import SUserAuth
 
 router_auth = APIRouter(
@@ -39,13 +41,14 @@ async def login_user(response: Response, user_data: SUserAuth):
     access_token = create_access_token({"sub": str(user.id)})
     response.set_cookie("booking_access_token", access_token, httponly=True)
     return {"access_token": access_token}
-#
-#
-# @router_auth.post("/logout")
-# async def logout_user(response: Response):
-#     response.delete_cookie("booking_access_token")
-#
-#
-# @router_users.get("/me")
-# async def read_users_me(current_user: Users = Depends(get_current_user)):
-#     return current_user
+
+
+@router_auth.post("/logout")
+async def logout_user(response: Response):
+    response.delete_cookie("booking_access_token")
+    return f'LogOut'
+
+
+@router_users.get("/me")
+async def read_users_me(current_user: Users = Depends(get_current_user)):
+    return current_user
