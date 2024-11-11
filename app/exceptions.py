@@ -71,3 +71,7 @@ class CannotProcessCSV(BookingException):
     status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
     detail = "Не удалось обработать CSV файл"
     detail = "Не удалось обработать CSV файл"
+
+class UserHasNotRole(BookingException):
+    status_code = status.HTTP_409_CONFLICT
+    detail = "Пользователь не имеет прав доступа"

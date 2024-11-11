@@ -1,14 +1,13 @@
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, Response, Form, HTTPException
+from fastapi import APIRouter, Depends, Response, Form
 
-# from app.exceptions import CannotAddDataToDatabase, UserAlreadyExistsException
+
+from app.exceptions import UserAlreadyExistsException, CannotAddDataToDatabase
 from app.users.auth import authenticate_user, create_access_token, get_password_hash
 from app.users.auth import get_password_hash
 from app.users.dao import UserDAO
-# from app.users.dependencies import get_current_user
-# from app.users.models import Users
-from app.users.dependencies import get_current_user
+from app.users.dependencies import get_current_user, get_current_admin_user
 from app.users.models import Users
 from app.users.schemas import SUserAuth
 
@@ -27,12 +26,13 @@ router_users = APIRouter(
 async def register_user(email: Annotated[str, Form()], password: Annotated[str, Form()]):
     existing_user = await UserDAO.find_one_or_none(email=email)
     if existing_user:
-        # raise UserAlreadyExistsException
-        raise HTTPException(status_code=500)
+        raise UserAlreadyExistsException
+        # raise HTTPException(status_code=500)
     hashed_password = get_password_hash(password)
     new_user = await UserDAO.add(email=email, hashed_password=hashed_password)
     if not new_user:
-        raise HTTPException(status_code=500)
+        raise CannotAddDataToDatabase
+        # raise HTTPException(status_code=500)
 
 
 @router_auth.post("/login")
@@ -48,7 +48,10 @@ async def logout_user(response: Response):
     response.delete_cookie("booking_access_token")
     return f'LogOut'
 
-
 @router_users.get("/me")
 async def read_users_me(current_user: Users = Depends(get_current_user)):
     return current_user
+
+@router_users.get("/all")
+async def read_users_all(current_user: Users = Depends(get_current_admin_user)):
+    return await UserDAO.find_all()

@@ -1,9 +1,12 @@
 from fastapi import Depends, Request
 from jose import ExpiredSignatureError, JWTError, jwt
 
+
 from app.config import settings
-from app.exceptions import IncorrectTokenFormatException, TokenAbsentException, TokenExpiredException, UserIsNotPresentException
+from app.exceptions import IncorrectTokenFormatException, TokenAbsentException, TokenExpiredException, \
+    UserIsNotPresentException, UserHasNotRole
 from app.users.dao import UserDAO
+from app.users.models import Users
 
 
 def get_token(request: Request):
@@ -32,3 +35,8 @@ async def get_current_user(token: str = Depends(get_token)):
         raise UserIsNotPresentException
 
     return user
+
+async def get_current_admin_user(current_user: Users = Depends(get_current_user)):
+    # if current_user.role != 'admin':
+    #     raise UserHasNotRole
+    return current_user

@@ -5,8 +5,7 @@ from pydantic import BaseModel
 from datetime import date
 
 from app.bookings.router import router as router_bookings
-from app.users.router import router_auth as router_auth
-from app.users.router import router_auth as router_users
+from app.users.router import router_auth as router_auth, router_users
 
 # from app.hotels.models import Hotels
 # from app.hotels.rooms.models import Rooms
@@ -15,8 +14,9 @@ from app.users.router import router_auth as router_users
 
 app = FastAPI()
 
-app.include_router(router_users)
+
 app.include_router(router_auth)
+app.include_router(router_users)
 app.include_router(router_bookings)
 
 
@@ -29,16 +29,6 @@ async def get_hotels(
 
     return date_from, date_to, stars
 
-
-class SBooking(BaseModel):
-    room_id: int
-    date_from: date
-    date_to: date
-
-
-@app.post("/bookings")
-async def add_booking(booking: SBooking):
-    pass
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
