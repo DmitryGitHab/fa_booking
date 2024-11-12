@@ -4,6 +4,8 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
+
+
     DB_HOST: str
     DB_PORT: int
     DB_USER: str
@@ -21,6 +23,9 @@ class Settings(BaseSettings):
 
     SECRET_KEY: str
     ALGORITHM: str
+    #
+    # MODE: Literal["DEV", "TEST", "PROD"]
+    # LOG_LEVEL: str
 
 settings = Settings()
 
