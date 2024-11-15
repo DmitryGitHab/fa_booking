@@ -1,10 +1,11 @@
 from datetime import date
 
 from fastapi import APIRouter, Depends
+from pydantic import TypeAdapter
 from starlette.requests import Request
 
 from app.bookings.dao import BookingDAO
-from app.bookings.schemas import SBooking, SBookingInfo
+from app.bookings.schemas import SBooking, SBookingInfo, SNewBooking
 from app.exceptions import RoomCannotBeBooked
 from app.users.dependencies import get_current_user
 
@@ -56,28 +57,10 @@ async def add_booking(
 #     return booking
 #
 #
-# @router.delete("/{booking_id}")
-# async def remove_booking(
-#     booking_id: int,
-#     current_user: Users = Depends(get_current_user),
-# ):
-#     await BookingDAO.delete(id=booking_id, user_id=current_user.id)
-
-
-# @router.get("")
-# async def get_bookings(request: Request):
-#     print(request.cookies)
-#     print(request.url)
-#     print(request.client)
-#     # return dir(request)
-
-# @router.get("", response_model=None)
-# async def get_bookings() -> list[SBooking]:
-#     return await BookingDAO.find_all()
-
-
-
-# @router.get('')
-# async def get_bookings() -> SBooking:
-#     return await BookingDAO.find_all()
+@router.delete("/{booking_id}")
+async def remove_booking(
+    booking_id: int,
+    current_user: Users = Depends(get_current_user),
+):
+    await BookingDAO.delete(id=booking_id, user_id=current_user.id)
 
