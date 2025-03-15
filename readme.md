@@ -1,3 +1,5 @@
+!Данный сервис в настоящий момент в разработке
+
 python3 -m venv .venv
 .\.venv\Scripts\activate
 
